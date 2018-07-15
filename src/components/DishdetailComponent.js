@@ -9,15 +9,14 @@ class DishDetail extends Component {
 		super(props); 
 
 		this.state ={
-			selectedDish: null
+			selectedDish: null,
+
 		}
 	}
 
-	onDishSelect(dish) {
+	renderDish(dish) {
 		this.setState({selectedDish:dish});
 	}
-
-
 
 	render() {
         const dish = this.props.selectedDish;
