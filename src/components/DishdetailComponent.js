@@ -10,13 +10,26 @@ class DishDetail extends Component {
 
 		this.state ={
 			selectedDish: null,
-
 		}
 	}
 
 	renderDish(dish) {
 		this.setState({selectedDish:dish});
 	}
+
+    renderComments(dish) {
+        return (
+            dish.comments.map(comment => {
+                return (
+                    <div key = {comment.id}>
+                        <p>{comment.comment}</p>
+                        <p>{comment.author}</p>
+                        <p>{comment.date}</p>
+                    </div>
+                ); 
+            })
+        ); 
+    }
 
 	render() {
         const dish = this.props.selectedDish;
@@ -33,7 +46,13 @@ class DishDetail extends Component {
                 				</CardBody>
            					 </Card>
                    		 </div>
-                   	</div>
+                        <div className = "col-12 col-md-5 m-1">
+                            <Card>
+                                <h4> Comment </h4>
+                                {this.renderComments(dish)}
+                            </Card>
+                        </div>
+                    </div>
                  </div> );
         } else {
         	return (<div></div>);
