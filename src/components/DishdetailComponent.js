@@ -4,64 +4,70 @@ import {DISHES} from '../shared/dishes';
 
 
 
-class DishDetail extends Component {
-		constructor(props) {
-		super(props); 
+class Dishdetail extends Component {
 
-		this.state ={
-			selectedDish: null,
-		}
-	}
-
-	renderDish(dish) {
-		this.setState({selectedDish:dish});
-	}
-
-    renderComments(dish) {
-        return (
-            dish.comments.map(comment => {
-                return (
-                    <div key = {comment.id}>
-                        <p>{comment.comment}</p>
-                        <p>{comment.author}</p>
-                        <p>{comment.date}</p>
-                    </div>
-                ); 
-            })
-        ); 
+    constructor(props) {
+        super(props);
+        this.state = {
+        };
     }
 
-	render() {
-        const dish = this.props.selectedDish;
-        if (dish) {
-            return (
-                <div className="container">
-                	<div className = "row">
-                    	<div className="col-12 col-md-5 m-1">
-                    		<Card>
-                				 <CardImg width="100%" src={dish.image} alt={dish.name} />
-                 				<CardBody>
-                   				 	<CardTitle>{dish.name}</CardTitle>
-                    				<CardText>{dish.description}</CardText>
-                				</CardBody>
-           					 </Card>
-                   		 </div>
-                        <div className = "col-12 col-md-5 m-1">
-                            <Card>
-                                <h4> Comment </h4>
-                                {this.renderComments(dish)}
-                            </Card>
-                        </div>
-                    </div>
-                 </div> );
-        } else {
-        	return (<div></div>);
+
+    renderDish(dish) {
+        if (dish)
+            return(
+                <Card>
+                    <CardImg  src={dish.image} alt={dish.name} />
+                    <CardBody>
+                      <CardTitle>{dish.name}</CardTitle>
+                      <CardText>{dish.description}</CardText>
+                    </CardBody>
+                </Card>
+            );
+        else
+            return(
+                <div></div>
+            );
+    }
+
+    renderComments(comments) {
+        if (!comments) {
+            return <div></div>;
         }
+        return (
+            <div>
+                <h4>Comments</h4>
+                <ul className="list-unstyled" >
+                    {this.props.dish.comments.map((com) => 
+                        <div key={com.id}>
+                            <li>{com.comment}</li>
+                            <li>{com.author}, {com.date}</li>
+                        </div>)}
+                </ul>
+            </div>
+        );
+    }
+
+    render() {
+        if (!this.props.dish) {
+            return <div></div>;
+        }
+        return (
+            <div className="row">
+                <div className="col-12 col-md-5 m-1">
+                    {this.renderDish(this.props.dish)}
+                </div>
+                <div className="col-12 col-md-5 m-1">
+                    {this.renderComments(this.props.dish.comments)}
+                </div>
+            </div>
+        );
     }
 }
 
 
-export default DishDetail;
+export default Dishdetail;
+
 
 
 
