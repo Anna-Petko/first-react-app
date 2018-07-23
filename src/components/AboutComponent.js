@@ -6,15 +6,20 @@ import { Link } from 'react-router-dom';
 function RenderLeader({leader}) {
         return (
             <Media>
-                <Media left href="#">
+                <Media left="#">
                     <Media object src={leader.image} alt={leader.name} />
                 </Media>
-                    <Media body right>
-                        <Media heading>{leader.name}</Media>
-                         <h6>{leader.designation}</h6>
+                
+                <Media body right>
+                    <div className="col-12 sm-3 m-3">
+                    <Media heading>{leader.name}</Media>
+                        <p>{leader.designation}</p>
                             {leader.description}
-                    </Media>
+                        </div>
+
+                </Media>
             </Media>
+        
     
         );
     }
@@ -82,7 +87,7 @@ function About(props) {
                 <div className="col-12">
                     <h2>Corporate Leadership</h2>
                 </div>
-                <div className="col-12">
+                <div className= "col-12">
                     <Media list>
                         {leaders}
                     </Media>
