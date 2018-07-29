@@ -10,6 +10,7 @@ import About from './AboutComponent';
 import {connect} from 'react-redux';
 
 
+
 const mapStateToProps = state => {
 
     return {
