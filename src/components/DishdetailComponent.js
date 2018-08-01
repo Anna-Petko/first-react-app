@@ -27,7 +27,7 @@ const maxLength = (len) => (val) => !val || (val.length <= len);
          );
     }
 
-    function RenderComments({comments}) {
+    function RenderComments({comments, addComment, dishId}) {
         if (!comments) {
             return <div></div>;
     }
@@ -41,7 +41,7 @@ const maxLength = (len) => (val) => !val || (val.length <= len);
                             <li>{comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</li>
                         </div>)}
                 </ul>
-                <CommentForm />
+                <CommentForm dishId ={dishId} addComment = {addComment} />
             </div>
 
         );
@@ -66,7 +66,9 @@ const maxLength = (len) => (val) => !val || (val.length <= len);
                     <RenderDish dish = {props.dish} />
                  </div>
                 <div className="col-12 col-md-5 m-1">
-                    <RenderComments comments ={props.comments} />
+                    <RenderComments comments ={props.comments}
+                    addComment ={props.addComment}
+                    dishId ={props.dish.id} />
                 </div>
             </div>
             
@@ -96,8 +98,7 @@ const maxLength = (len) => (val) => !val || (val.length <= len);
   }
 
     handleSubmit(values) {
-        console.log("Current state is: " + JSON.stringify(values));
-        alert("Current state is: " + JSON.stringify(values));
+       this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
         render() {
