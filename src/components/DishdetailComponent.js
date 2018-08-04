@@ -30,7 +30,7 @@ const maxLength = (len) => (val) => !val || (val.length <= len);
          );
     }
 
-    function RenderComments({comments, addComment, dishId}) {
+    function RenderComments({comments, postComment, dishId}) {
         if (!comments) {
             return <div></div>;
     }
@@ -44,7 +44,7 @@ const maxLength = (len) => (val) => !val || (val.length <= len);
                             <li>{comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</li>
                         </div>)}
                 </ul>
-                <CommentForm dishId ={dishId} addComment = {addComment} />
+                <CommentForm dishId ={dishId} postComment = {postComment} />
             </div>
 
         );
@@ -92,7 +92,7 @@ const maxLength = (len) => (val) => !val || (val.length <= len);
                  </div>
                 <div className="col-12 col-md-5 m-1">
                     <RenderComments comments ={props.comments}
-                    addComment ={props.addComment}
+                    postComment ={props.postComment}
                     dishId ={props.dish.id} />
                 </div>
             </div>
@@ -123,7 +123,7 @@ const maxLength = (len) => (val) => !val || (val.length <= len);
   }
 
     handleSubmit(values) {
-       this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+       this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
         render() {
