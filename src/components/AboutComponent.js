@@ -3,26 +3,29 @@ import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'r
 import { Link } from 'react-router-dom';
 import {Loading} from './LoadingComponent';
 import {baseUrl} from '../shared/baseUrl';
+import {FadeTransform, Fade, Stagger} from 'react-animation-components';
 
 
 function RenderLeader({leader}) {
         return (
         <div className="col-12">
+        <Stagger in>
             <Media>
                 <Media left="#">
                     <Media object src={baseUrl + leader.image} alt={leader.name} />
                 </Media>
-                
                 <Media body right>
-                    <div className="col-12 sm-3 m-3">
-                    <Media heading>{leader.name}</Media>
-                        <p>{leader.designation}</p>
-                        <p>{leader.description}</p>
+                    <Fade in>
+                        <div className="col-12 sm-3 m-3">
+                        <Media heading>{leader.name}</Media>
+                            <p>{leader.designation}</p>
+                            <p>{leader.description}</p>
                         </div>
-
+                    </Fade>
+                    </Media>
                 </Media>
-            </Media>
-        </div>
+                </Stagger>
+            </div>
         
     
         );
