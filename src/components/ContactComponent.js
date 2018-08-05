@@ -26,6 +26,7 @@ class Contact extends Component {
         console.log("Current state is:" + JSON.stringify(values));
         alert ("Current state is:" + JSON.stringify(values));
         this.props.resetFeedbackForm();
+        this.props.postFeedback(values);
         
     }
 
@@ -85,6 +86,7 @@ class Contact extends Component {
                                     required, minLength: minLength(3), maxLength: maxLength(15)
                                 }}
                                  />
+                            
                             <Errors
                                 className="text-danger"
                                 model = ".firstname"
@@ -171,6 +173,7 @@ class Contact extends Component {
                                         <Control.checkbox model = ".agree" name = "agree"
                                         className = "form-check-input"
                                          /> { ' '}
+                                        
                                         <strong> May we contact you?</strong>
                                     </Label>
                                 </div>
@@ -188,7 +191,8 @@ class Contact extends Component {
                             <Col md = {10}>
                                 <Control.textarea model = ".message" id = "message" name = "message"
                                 rows = "12"
-                                className = "form-control" /> 
+                                className = "form-control" 
+                               /> 
                             </Col>
                         </Row>
                         <Row className = "form-group">
